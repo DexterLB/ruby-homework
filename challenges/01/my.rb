@@ -1,3 +1,3 @@
-def format_string(str, len)
-    str.strip().squeeze(' ').upcase().center(len)
+def format_string(string, width)
+    string.strip().squeeze(' ').upcase().center(width)
 end
