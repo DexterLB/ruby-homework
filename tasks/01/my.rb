@@ -1,13 +1,12 @@
 require 'bigdecimal'
 
-PHI = (BigDecimal('1') + Math.sqrt(5))/2
+PHI = (BigDecimal(1) + Math.sqrt(5)) / 2
 PSI = 1 - PHI
 
 def series(series_name, n)
-  if series_name == 'fibonacci'
-    return ((PHI**n - PSI**n)/Math.sqrt(5)).round
-  elsif series_name == 'lucas'
-    return (PHI**(n - 1) + PSI**(n - 1)).round
+  case series_name
+    when 'fibonacci' then ((PHI**n - PSI**n) / Math.sqrt(5)).round
+    when 'lucas' then (PHI**(n - 1) + PSI**(n - 1)).round
+    else series('fibonacci', n) + series('lucas', n)
   end
-  series('fibonacci', n) + series('lucas', n)
 end
