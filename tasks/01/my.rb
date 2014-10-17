@@ -5,8 +5,8 @@ PSI = 1 - PHI
 
 def series(series_name, n)
   case series_name
-    when 'fibonacci' then ((PHI**n - PSI**n) / Math.sqrt(5)).round
-    when 'lucas' then (PHI**(n - 1) + PSI**(n - 1)).round
-    else series('fibonacci', n) + series('lucas', n)
+    when 'fibonacci'  then ((PHI**n - PSI**n) / Math.sqrt(5)).round
+    when 'lucas'      then (PHI**(n - 1) + PSI**(n - 1)).round
+    when 'summed'     then series('fibonacci', n) + series('lucas', n)
   end
 end
