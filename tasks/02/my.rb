@@ -6,7 +6,7 @@ class NumberSet
   end
 
   def <<(element)
-    @set << element if !@set.include? element
+    @set << element if not @set.include? element
   end
 
   def size()
