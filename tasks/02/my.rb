@@ -1,24 +1,24 @@
 class NumberSet
   include Enumerable
 
-  def initialize()
+  def initialize
     @set = []
   end
 
   def <<(element)
-    @set << element if not @set.include? element
+    @set << element unless @set.include? element
   end
 
-  def size()
+  def size
     @set.size
   end
 
-  def empty?()
+  def empty?
     @set.empty?
   end
 
-  def each()
-    @set.each { |element| yield element }
+  def each(&block)
+    @set.each(&block)
   end
 
   def [](filter)
