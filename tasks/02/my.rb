@@ -1,24 +1,8 @@
-class NumberSet
+class NumberSet < Array
   include Enumerable
 
-  def initialize
-    @set = []
-  end
-
   def <<(number)
-    @set << number unless @set.include? number
-  end
-
-  def size
-    @set.size
-  end
-
-  def empty?
-    @set.empty?
-  end
-
-  def each(&block)
-    @set.each(&block)
+    super << number unless include? number
   end
 
   def [](filter)
