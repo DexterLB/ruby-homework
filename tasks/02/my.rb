@@ -28,7 +28,7 @@ class NumberSet
   end
 end
 
-module SetFilter
+class Filter
   def &(other)
     Filter.new { |element| test(element) and other.test(element) }
   end
@@ -36,10 +36,6 @@ module SetFilter
   def |(other)
     Filter.new { |element| test(element) or other.test(element) }
   end
-end
-
-class Filter
-  include SetFilter
 
   def initialize(&condition)
     @condition = condition
@@ -50,9 +46,7 @@ class Filter
   end
 end
 
-class SignFilter
-  include SetFilter
-
+class SignFilter < Filter
   def initialize(sign)
     @sign = sign
   end
@@ -67,9 +61,7 @@ class SignFilter
   end
 end
 
-class TypeFilter
-  include SetFilter
-
+class TypeFilter < Filter
   def initialize(type)
     @type = type
   end
