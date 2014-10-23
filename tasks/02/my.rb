@@ -5,8 +5,8 @@ class NumberSet
     @set = []
   end
 
-  def <<(element)
-    @set << element unless @set.include? element
+  def <<(number)
+    @set << number unless @set.include? number
   end
 
   def size
@@ -22,27 +22,27 @@ class NumberSet
   end
 
   def [](filter)
-    result = NumberSet.new
-    each { |element| result << element if filter.test(element) }
-    result
+    filtered_set = NumberSet.new
+    each { |number| filtered_set << number if filter.matches?(number) }
+    filtered_set
   end
 end
 
 class Filter
   def &(other)
-    Filter.new { |element| test(element) and other.test(element) }
+    Filter.new { |number| matches?(number) and other.matches?(number) }
   end
 
   def |(other)
-    Filter.new { |element| test(element) or other.test(element) }
+    Filter.new { |number| matches?(number) or other.matches?(number) }
   end
 
   def initialize(&condition)
     @condition = condition
   end
 
-  def test(element)
-    @condition.call(element)
+  def matches?(number)
+    @condition.call(number)
   end
 end
 
@@ -51,12 +51,12 @@ class SignFilter < Filter
     @sign = sign
   end
 
-  def test(element)
+  def matches?(number)
     case @sign
-      when :positive     then element >  0
-      when :non_positive then element <= 0
-      when :negative     then element <  0
-      when :non_negative then element >= 0
+      when :positive     then number >  0
+      when :non_positive then number <= 0
+      when :negative     then number <  0
+      when :non_negative then number >= 0
     end
   end
 end
@@ -66,11 +66,11 @@ class TypeFilter < Filter
     @type = type
   end
 
-  def test(element)
+  def matches?(number)
     case @type
-      when :integer then element.is_a? Integer
-      when :real    then element.is_a? Float or element.is_a? Rational
-      when :complex then element.is_a? Complex
+      when :integer then number.is_a? Integer
+      when :real    then number.is_a? Float or number.is_a? Rational
+      when :complex then number.is_a? Complex
     end
   end
 end
