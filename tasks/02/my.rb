@@ -5,7 +5,7 @@ class NumberSet < Array
 
   def [](filter)
     each_with_object(NumberSet.new) do |number, filtered_set|
-        filtered_set << number if filter.matches?(number)
+      filtered_set << number if filter.matches?(number)
     end
   end
 end
