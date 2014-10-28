@@ -1,7 +1,8 @@
 class String
   def word_wrap(chars_per_row)
     row = ''
-    split.each_with_object([]) do |word, wrapped|
+    wrapped = []
+    split.each do |word|
       if (row + word).length + 1 > chars_per_row
         wrapped << row unless row.empty?
         row = word
@@ -9,6 +10,8 @@ class String
         row += ' ' unless row.empty?
         row += word
       end
-    end + (row.empty? ? [] : [row])
+    end
+    wrapped << row unless row.empty?
+    wrapped
   end
 end
