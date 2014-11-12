@@ -1,14 +1,12 @@
 class NumberSet < Array
-  include Enumerable
-
   def <<(number)
     super << number unless include? number
   end
 
   def [](filter)
-    filtered_set = NumberSet.new
-    each { |number| filtered_set << number if filter.matches?(number) }
-    filtered_set
+    each_with_object(NumberSet.new) do |number, filtered_set|
+      filtered_set << number if filter.matches?(number)
+    end
   end
 end
 
